@@ -16,6 +16,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+
                   <th>No</th>
                   <th>Nama</th>
                   <th></th>
@@ -27,7 +28,16 @@
                 <tr>
                   <td>{{ $index += 1 }}</td>
                   <td>{{ $data->category_name }}</td>
-                  <td></td>
+                  <td>
+                    <a href="{{ route('categories.edit', $data->id) }}" class="btn btn-secondary"><i class="bi bi-pencil"></i></a>
+                    <form class="d-inline" action="{{ route('categories.destroy', $data->id) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>
