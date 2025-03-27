@@ -20,12 +20,16 @@ class LoginController extends Controller
 
         // $email = $request->email;
         // $password = $request->password;
-        $credential = $request->only('email','password');  
+        $credential = $request->only('email','password');
         // Auth
         if (Auth::attempt($credential)) {
             return redirect('dashboard')->with('success', 'Success Login');
         } else {
             return back()->withErrors(['email'=> 'Please check your creddentials'])->withInput();
         }
+    }
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect()->to('login');
     }
 }
