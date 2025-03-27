@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Categories;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("dashboard.index");
+        $title = "Data Categories";
+        $datas = Categories::get();
+        return view('categories.index', compact('title', 'datas'));
     }
 
     /**
@@ -19,7 +22,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -27,7 +30,10 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Categories::create([
+            'category_name' => $request->category_name,
+        ]) ;
+        return redirect()->to('categories');
     }
 
     /**
