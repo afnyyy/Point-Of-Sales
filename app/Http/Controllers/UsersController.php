@@ -63,11 +63,11 @@ class UsersController extends Controller
         // $category = Categories::find( $id );
         // $category->category_name = $request->category_name;
         // $Ccategory->save();
-
+        $users = User::find( $id );
         User::where('id', $id)->update([
             'name' => $request->name,
             'email'=> $request->email,
-            'password'=> $request->password,
+            'password'=> $request->password ?? $users->password,
 
         ]) ;
         return redirect()->to('users');
