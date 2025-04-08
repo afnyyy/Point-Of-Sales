@@ -42,6 +42,7 @@
 <body>
 
   <!-- ======= Header ======= -->
+  @include('sweetalert::alert')
   @include('layouts.inc.header')
 
   <!-- ======= Sidebar ======= -->
@@ -59,17 +60,17 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    
+
     @yield('content')
     <!-- tampilan user -->
     <!-- tampilan categories -->
 
-    
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   @include('layouts.inc.footer')
-  
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -85,6 +86,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
+
+  @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
 </body>
 

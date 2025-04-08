@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,5 @@ Route::post('action-login', [LoginController::class, 'actionLogin']);
 
 Route::resource('dashboard', DashboardController::class);
 Route::resource('categories', CategoriesController::class);
+Route::resource('products',ProductsController::class);
 Route::resource('users', UsersController::class);
