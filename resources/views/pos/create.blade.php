@@ -8,14 +8,14 @@
             <div class="card-body">
               <h5 class="card-title">Select Categories</h5>
               <div align="right" class="mt-2">
-                  <a href="{{ url()->previous() }}" class="text-primary">Back</a>
+                  <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
               </div>
               <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                       <label for="" class="col-form-label">Category Name</label>
                       <select name="category_id" id="category_id" class="form-control">
-                          <option value="" hidden>Select One</option>
+                          <option value="" =>Select One</option>
                           @foreach ($categories as $category)
                           <option value="{{ $category->id }}">{{ $category->category_name}}</option>
                           @endforeach
@@ -24,16 +24,13 @@
                   <div class="mb-3">
                       <label for="" class="col-form-label">Product Name</label>
                       <select name="" id="product_id" class="form-control">
-                          <option value="" hidden>Select One</option>
+                          <option value="">Select One</option>
                           <option value=""></option>
                       </select>
                   </div>
 
                 <div class="mb-3">
-                  <button class="btn btn-primary" type="submit">Save </button>
-                  <button class="btn btn-danger" type="reset">Cancel </button>
-
-
+                  <button class="btn btn-primary add-row" type="button">Add to Cart </button>
                 </div>
 
               </form>
