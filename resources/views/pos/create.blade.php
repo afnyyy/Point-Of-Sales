@@ -49,6 +49,7 @@
                             <th>Produk</th>
                             <th>Qty</th>
                             <th>Harga</th>
+                            <th>SubTotal</th>
                         <tr>
                     </thead>
                     <tbody>
@@ -57,16 +58,10 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="2">Subtotal</th>
-                            <td colspan="2">
-                                <input type="number" class="form-control">
-                            </td>
-                        </tr>
-
-                        <tr>
                             <th colspan="2">Grand Total</th>
-                            <td colspan="2">
-                                <input type="number" class="form-control">
+                            <td colspan="3">
+                                <span class="grandtotal"></span>
+                                <input type="hidden" class="form-control" name="grandtotal" readonly>
                             </td>
                         </tr>
                     </tfoot>

@@ -91,6 +91,15 @@
   @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
   <script>
+    function formatRupiah(number) {
+        const formatted = number.toLocaleString("id", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        });
+        return formatted;
+    }
+
+
     $('#category_id').change(function(){
         let cat_id = $(this).val(),
         option = `<option value="">Select One</option>`;
@@ -112,10 +121,10 @@
 
     $(".add-row").click(function(){
         let tbody = $('tbody');
-        let selectedOption = $('product_id').find('option:selected');
+        let selectedOption = $('#product_id').find('option:selected');
         let namaProduk = selectedOption.text()
         let photoProduct = selectedOption.data('img');
-        let productPrice = selectedOption.data('price');
+        let productPrice = parseInt(selectedOption.data('price')) || 0;
 
         if($('#category_id').val() == "") {
             alert('Category required');
@@ -127,18 +136,43 @@
         }
 
         let newRow = "<tr>";
-        newRow += `<td><img src="${photoProduct}" alt="ini gambar"></td>`;
+        newRow += `<td><img src="{{ asset('storage/') }}/${photoProduct}" alt="ini gambar" width="120"></td>`;
         newRow += `<td>${namaProduk}</td>`;
-        newRow += `<td><input type="number" name='qty[]'></td>`;
-        newRow += `<td>${productPrice}</td>`;
+        newRow += `<td width='110'><input value='1' type="number" name='qty[]' class='qty form-control'></td>`;
+        newRow += `<td><span class='price' data-price=${productPrice}>${formatRupiah(productPrice)}</span></td>`;
+        newRow += `<td><span class='subtotal'>${formatRupiah(productPrice)}</span></td>`;
         newRow += "</tr>";
 
         tbody.append(newRow);
+        calculateSubTotal();
+
 
 
 
         clearAll();
+
+
+        $('.qty').off().on('input', function(){
+            let row = $(this).closest('tr');
+            let qty = parseInt($(this).val()) || 0;
+            let price = parseInt(row.find('.price').data('price')) || 0;
+            let total = qty * price;
+            row.find('.subtotal').text(formatRupiah(total)); //NaN
+            calculateSubTotal();
+
+        });
+
+
     });
+
+    function calculateSubTotal(){
+        let grandtotal = 0;
+        $('.subtotal').each(function() {
+            let total = parseInt($(this).text().replace(/\./g,''));
+            grandtotal += total;
+        });
+        $('.grandtotal').text(formatRupiah(grandtotal));
+    }
 
     function clearAll() {
         $('#category_id').val("");
