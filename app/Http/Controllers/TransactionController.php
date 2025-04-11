@@ -72,8 +72,13 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Orders::findOrFail($id);
+        $orderDetails = orderDetails::with('product')->where('order_id', $id)->get();
+        $title = "Order Details Of " . $order->order_code;
+        return view('pos.show', compact('order','orderDetails','title'));
+
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -134,5 +139,11 @@ class TransactionController extends Controller
         $products = Products::where('category_id', $category_id)->get();
         $response = ['status' => 'success', 'message' => 'Fetch product success', 'data' => $products];
         return response()->json($response, 200);
+    }
+    public function print($id)
+    {
+        $order = Orders::with('orderDetails')->FindOrFail($id);
+        $orderDetails = orderDetails::with('product')->where('order_id', $id)->get();
+        return view('pos.print-struk', compact('order','orderDetails'));
     }
 }

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title'. 'Point Of Sale')
+@section('title'. 'oderder Detail')
 @section('content')
 <section class="section">
     <form action="{{ route('pos.store') }}" method="post" enctype="multipart/form-data">

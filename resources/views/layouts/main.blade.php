@@ -160,7 +160,7 @@
             let price = parseInt(row.find('.price').data('price')) || 0;
             let total = qty * price;
             row.find('.subtotal').text(formatRupiah(total)); //NaN
-            row.find('.subtotal').text(formatRupiah(total)); //NaN
+            row.find('.subtotal_input').val(formatRupiah(total)); //NaN
             calculateSubTotal();
 
         });
