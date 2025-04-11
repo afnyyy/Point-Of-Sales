@@ -35,8 +35,8 @@
                   <td>{{ $data->order_amount}}</td>
                   <td>{{ $data->order_status ? 'Paid' : 'Unpaid' }}</td>
                   <td>
-                    <a href="{{ route('pos.show', $data->id) }}" class="btn btn-secondary"><i class="bi bi-detail"></i></a>
-                    <a href="{{ route('pos.edit', $data->id) }}" class="btn btn-success"><i class="bi bi-print"></i></a>
+                    <a href="{{ route('pos.show', $data->id) }}" class="btn btn-secondary"><i class="bi bi-eye"></i></a>
+                    <a href="{{ route('pos.edit', $data->id) }}" class="btn btn-success"><i class="bi bi-printer"></i></a>
                   </td>
                 </tr>
                 @endforeach

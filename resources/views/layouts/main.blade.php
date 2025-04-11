@@ -123,6 +123,7 @@
         let tbody = $('tbody');
         let selectedOption = $('#product_id').find('option:selected');
         let namaProduk = selectedOption.text()
+        let productId = selectedOption.val()
         let photoProduct = selectedOption.data('img');
         let productPrice = parseInt(selectedOption.data('price')) || 0;
 
@@ -137,10 +138,11 @@
 
         let newRow = "<tr>";
         newRow += `<td><img src="{{ asset('storage/') }}/${photoProduct}" alt="ini gambar" width="120"></td>`;
-        newRow += `<td>${namaProduk}</td>`;
+        newRow += `<td>${namaProduk}<input value='${productId}' type="hidden" name='product_id[]'></td>`;
         newRow += `<td width='110'><input value='1' type="number" name='qty[]' class='qty form-control'></td>`;
-        newRow += `<td><span class='price' data-price=${productPrice}>${formatRupiah(productPrice)}</span></td>`;
-        newRow += `<td><span class='subtotal'>${formatRupiah(productPrice)}</span></td>`;
+        newRow += `<td><span class='price' data-price=${productPrice}>${formatRupiah(productPrice)}</span><input value='${productPrice}' type="hidden" name='order_price[]'></td>`;
+        newRow += `<td><input value='${productPrice}' class="subtotal_input" type="hidden" name='order_subtotal[]'><span class='subtotal'>${formatRupiah(productPrice)}</span></td>`;
+        newRow += `<td><button class="btn btn-danger btn-sm delete-row" type="button"><i class="bi bi-trash"></i></button></td>`
         newRow += "</tr>";
 
         tbody.append(newRow);
@@ -158,6 +160,7 @@
             let price = parseInt(row.find('.price').data('price')) || 0;
             let total = qty * price;
             row.find('.subtotal').text(formatRupiah(total)); //NaN
+            row.find('.subtotal').text(formatRupiah(total)); //NaN
             calculateSubTotal();
 
         });
@@ -172,6 +175,13 @@
             grandtotal += total;
         });
         $('.grandtotal').text(formatRupiah(grandtotal));
+        $('input[name="grandtotal"]').val(grandtotal);
+
+        $(document).on('click', '.delete-row', function(){
+        $(this).closest('tr').remove();
+        calculateSubTotal();
+
+        });
     }
 
     function clearAll() {

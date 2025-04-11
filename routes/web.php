@@ -30,3 +30,4 @@ Route::resource('pos', TransactionController::class);
 Route::resource('users', UsersController::class);
 
 Route::get('get-product/{id}', [TransactionController::class, 'getProduct']);
+Route::get('logout', [LoginController::class, 'logout']);

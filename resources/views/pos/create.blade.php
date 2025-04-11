@@ -2,6 +2,7 @@
 @section('title'. 'Point Of Sale')
 @section('content')
 <section class="section">
+    <form action="{{ route('pos.store') }}" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-lg-5">
           <div class="card">
@@ -10,7 +11,6 @@
               <div align="right" class="mt-2">
                   <a href="{{ url()->previous() }}" class="btn btn-primary">Back</a>
               </div>
-              <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                       <label for="" class="col-form-label">Category Name</label>
@@ -33,16 +33,16 @@
                   <button class="btn btn-primary add-row" type="button">Add to Cart </button>
                 </div>
 
-              </form>
             </div>
-          </div>
         </div>
-        <div class="col-lg-7">
-            <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Order Basket</h5>
 
-                  <table class="table table-hover">
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Order Basket</h5>
+
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Foto</th>
@@ -50,29 +50,34 @@
                             <th>Qty</th>
                             <th>Harga</th>
                             <th>SubTotal</th>
-                        <tr>
-                    </thead>
-                    <tbody>
+                            <th>Action</th>
+                            <tr>
+                            </thead>
+                            <tbody>
 
 
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="2">Grand Total</th>
-                            <td colspan="3">
-                                <span class="grandtotal"></span>
-                                <input type="hidden" class="form-control" name="grandtotal" readonly>
-                            </td>
-                        </tr>
-                    </tfoot>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="2">Grand Total</th>
+                                    <td colspan="3" class="text-end pe-5 me-5">
+                                        <span class="grandtotal"></span>
+                                        <input type="hidden" class="form-control" name="grandtotal" readonly>
+                                    </td>
+                                </tr>
+                            </tfoot>
 
-                  </table>
+                        </table>
+                        <div class="mt-3 text-end">
+                            <button type="submit" class="btn btn-success">Confirm Order</button>
+                        </div>
 
+                    </div>
                 </div>
-              </div>
+            </div>
         </div>
-    </div>
+        </form>
 
-</section>
+    </section>
 
-@endsection
+    @endsection
